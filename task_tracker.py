@@ -1,9 +1,10 @@
 import sys
 def main():
     action = sys.argv[1]
-    if action not in features.keys():
-        print('Please, select a action: [add,update,del,list]')
-    print(features[action])
+    if action not in(features.keys()):
+        print('ERROR: Please, select a action: [add,update,del,list]')
+    else:
+        print(features[action])
 
 if __name__ == '__main__':
     features = {
