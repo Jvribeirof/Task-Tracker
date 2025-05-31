@@ -1,8 +1,12 @@
 import sys
+import os
 def main():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if len(sys.argv) > 2:
+        raise IndexError('Pleas, select just one action')
     action = sys.argv[1]
     if action not in(features.keys()):
-        print('ERROR: Please, select a action: [add,update,del,list]')
+        raise ValueError('Please, select a action: [add,update,del,list]')
     else:
         print(features[action])
 
