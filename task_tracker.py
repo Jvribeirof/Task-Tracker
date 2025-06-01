@@ -35,9 +35,13 @@ def list_task(tasks:list,path:Path):
     query = input('select [all, todo, in-progress,done,]: ')
     if not tasks:
         print("There's no taks saved...")
-    else:
+    elif query == 'all':
         for task in tasks:
             print(task)
+    else:
+        for task in tasks:
+            if task['status']==query:
+                print(task)
 
 def add_task(tasks:list,path:Path):
     descript = input('Description: ')
@@ -46,6 +50,7 @@ def add_task(tasks:list,path:Path):
     new_task = {
         'id':id_task,
         'description':descript,
+        'status':'todo',
         'createdAt': str(current_date),
         'updatedAt': str(current_date)
     }
@@ -64,12 +69,12 @@ def del_task(tasks:list,path:Path):
 
 def updt_task(tasks:list,path:Path):
     descript = input('Select wich one you want to be update [Description]: ')
-    new_dscrpt = input('Please, wright down the new description: ')
+    new_status = input('Please, wright down the new status [todo,in-progress,done]: ')
     current_date = date.today()
     for i, task in enumerate(tasks):
         if task['description'] == descript:
             tasks[i]['updatedAt'] = str(current_date)
-            tasks[i]['description'] = new_dscrpt
+            tasks[i]['status'] = new_status
             break
     with open(path, 'w', encoding='utf-8') as file:
         json.dump(tasks, file, ensure_ascii= False, indent=4)
