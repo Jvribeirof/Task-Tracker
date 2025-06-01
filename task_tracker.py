@@ -62,11 +62,22 @@ def del_task(tasks:list,path:Path):
     with open(path, 'w', encoding='utf-8') as file:
         json.dump(tasks, file, ensure_ascii= False, indent=4)
 
+def updt_task(tasks:list,path:Path):
+    descript = input('Select wich one you want to be update [Description]: ')
+    new_dscrpt = input('Please, wright down the new description: ')
+    current_date = date.today()
+    for i, task in enumerate(tasks):
+        if task['description'] == descript:
+            tasks[i]['updatedAt'] = str(current_date)
+            tasks[i]['description'] = new_dscrpt
+            break
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(tasks, file, ensure_ascii= False, indent=4)
 
 if __name__ == '__main__':
     features = {
        'add':add_task,
-       'update': "FUNC UPDATE TASK",
+       'update': updt_task,
        'del':del_task,
        'list': list_task 
     }
