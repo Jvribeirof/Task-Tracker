@@ -53,12 +53,21 @@ def add_task(tasks:list,path:Path):
     with open(path, 'w', encoding='utf-8') as file:
         json.dump(tasks, file, ensure_ascii= False, indent=4)
     
+def del_task(tasks:list,path:Path):
+    descript = input('Select wich one you want to be deleted [Description]: ')
+    for i, task in enumerate(tasks):
+        if task['description'] == descript:
+            del tasks[i]
+            break
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(tasks, file, ensure_ascii= False, indent=4)
+
 
 if __name__ == '__main__':
     features = {
        'add':add_task,
        'update': "FUNC UPDATE TASK",
-       'del':"FUNC DELETE TASK",
+       'del':del_task,
        'list': list_task 
     }
     main()
