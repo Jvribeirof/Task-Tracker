@@ -1,19 +1,7 @@
 [
     {
-        "id": "1748793042",
-        "description": "programação orientada a objeto",
-        "createdAt": "2025-06-01",
-        "updatedAt": "2025-06-01"
-    },
-    {
-        "id": "1748793081",
-        "description": "postgreSQL",
-        "createdAt": "2025-06-01",
-        "updatedAt": "2025-06-01"
-    },
-    {
-        "id": "1748793110",
-        "description": "API design",
+        "id": "1748801619",
+        "description": "programação",
         "createdAt": "2025-06-01",
         "updatedAt": "2025-06-01"
     }
