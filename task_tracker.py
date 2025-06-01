@@ -2,6 +2,8 @@ import sys
 import os
 from pathlib import Path
 import json
+from datetime import date
+from time import time
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -13,8 +15,8 @@ def main():
     if action not in(features.keys()):
         raise ValueError('Please, select a action: [add,update,del,list]')
     else:
-        json_file = check_json_file()
-        features[action](json_file)
+        json_file, JSON_PATH = check_json_file()
+        features[action](json_file,JSON_PATH)
 
 def check_json_file():
     MAIN_PATH = Path(__file__).parent
@@ -27,19 +29,34 @@ def check_json_file():
             json_file = json.load(file)
         except:
             json_file = None
-    return json_file
+    return json_file,JSON_PATH
 
-def list_task(path):
+def list_task(tasks:list,path:Path):
     query = input('select [all, todo, in-progress,done,]: ')
-    if not path:
+    if not tasks:
         print("There's no taks saved...")
     else:
-        for task in path:
+        for task in tasks:
             print(task)
+
+def add_task(tasks:list,path:Path):
+    descript = input('Description: ')
+    id_task = str(int(time()))
+    current_date = date.today()
+    new_task = {
+        'id':id_task,
+        'description':descript,
+        'createdAt': str(current_date),
+        'updatedAt': str(current_date)
+    }
+    tasks.append(new_task)
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(tasks, file, ensure_ascii= False, indent=4)
+    
 
 if __name__ == '__main__':
     features = {
-       'add':"FUNC ADD TASK",
+       'add':add_task,
        'update': "FUNC UPDATE TASK",
        'del':"FUNC DELETE TASK",
        'list': list_task 
